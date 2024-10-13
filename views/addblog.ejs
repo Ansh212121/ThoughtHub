@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('partials/head') %>
+    <title>Add New Blog</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #1e1e1e; /* Dark background */
+            margin: 0;
+            padding: 0;
+            color: #e0e0e0; /* Light text for contrast */
+        }
+
+        .container {
+            width: 60%;
+            margin: 50px auto;
+            background-color: #2c2c2c; /* Slightly lighter background for the form */
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+        }
+
+        h2 {
+            color: #f5a623; /* Accent color for heading */
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        label {
+            color: #e0e0e0; /* Light color for labels */
+        }
+
+        input[type="text"], textarea, input[type="file"] {
+            background-color: #3a3a3a; /* Dark background for inputs */
+            color: #d1d1d1; /* Light text for inputs */
+            border: 1px solid #565656;
+            border-radius: 5px;
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+        }
+
+        input[type="text"]:focus, textarea:focus, input[type="file"]:focus {
+            outline: none;
+            border-color: #f5a623; /* Accent color for focus */
+        }
+
+        textarea {
+            background-color: #3a3a3a; /* Dark background for textarea */
+            color: #d1d1d1; /* Light text color */
+            resize: vertical;
+            border: 1px solid #565656;
+            padding: 10px;
+            border-radius: 5px;
+            width: 100%;
+            margin-top: 5px;
+        }
+
+        button {
+            background-color: #f5a623; /* Accent color for button */
+            color: #1e1e1e; /* Dark text for button */
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 1rem;
+        }
+
+        button:hover {
+            background-color: #e0951c; /* Slight hover effect */
+        }
+
+        .form-control {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <%- include('./partials/nav.ejs') %>
+    
+    <div class="container mt-5">
+        <h2 class="mb-4">Add New Blog Post</h2>
+        <form enctype="multipart/form-data" method="POST" action="/blog">
+            <div class="mb-3">
+                <label for="title" class="form-label">Title</label>
+                <input type="text" class="form-control" id="title" name="title" placeholder="Enter blog title" required>
+            </div>
+            <div class="mb-3">
+                <label for="body" class="form-label">Body</label>
+                <textarea class="form-control" id="body" name="body" rows="5" placeholder="Write your blog content here..." required></textarea>
+            </div>
+            <div class="mb-3">
+                <label for="coverImageURL" class="form-label">Upload Image</label>
+                <input type="file" class="form-control" id="coverImageURL" name="coverImageURL" accept="image/*">
+            </div>
+            
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+
+    <%- include('./partials/scripts.ejs') %>  
+</body>
+</html>

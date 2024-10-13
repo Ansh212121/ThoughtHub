@@ -1,0 +1,74 @@
+<nav class="navbar navbar-expand-lg bg-dark border-bottom border-body" data-bs-theme="dark">
+  <div class="container-fluid">
+      <a class="navbar-brand" href="#">ThoughtHub</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavDropdown">
+          <ul class="navbar-nav">
+              <li class="nav-item">
+                  <a class="nav-link active" aria-current="page" href="/">Home</a>
+              </li>
+              <% if (locals.user) { %>
+                  <li class="nav-item">
+                      <a class="nav-link" href="/blog/add-new">Add Blog</a>
+                  </li>
+                  <li class="nav-item dropdown">
+                      <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <%= user ? user.email : 'Guest' %>
+                      </a>
+                      <ul class="dropdown-menu dropdown-menu-dark">
+                          <li><a class="dropdown-item" href="/user/logout">Logout</a></li>
+                      </ul>
+                  </li>
+              <% } else { %>
+                  <li class="nav-item">
+                      <a class="nav-link" href="/user/signup">SIGN UP</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" href="/user/signin">SIGN IN</a>
+                  </li>
+              <% } %>
+          </ul>
+      </div>
+  </div>
+</nav>
+
+<% if (locals.error) { %>
+  <div class="alert alert-danger text-center" role="alert">
+      <%= locals.error %>
+  </div>
+<% } %>
+
+<style>
+  .navbar {
+      border-bottom: 2px solid #f5a623;
+  }
+
+  .nav-link {
+      color: #e0e0e0;
+      transition: color 0.3s;
+  }
+
+  .nav-link:hover {
+      color: #f5a623;
+  }
+
+  .dropdown-menu {
+      background-color: #1e1e1e;
+  }
+
+  .dropdown-item {
+      color: #e0e0e0;
+  }
+
+  .dropdown-item:hover {
+      background-color: #f5a623;
+      color: #121212;
+  }
+
+  .alert {
+      margin: 15px;
+      border-radius: 5px;
+  }
+</style>
