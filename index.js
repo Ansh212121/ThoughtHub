@@ -18,7 +18,7 @@ const mongoose = require('mongoose');
 // Use the URL encoded password
 require('dotenv').config();
 
-const password = 'Ansh2109%40';
+const password =process.env.pass;
 const uri = `mongodb+srv://ansh2109ag:${password}@cluster0.9x9nr.mongodb.net/blogify?retryWrites=true&w=majority`; // Use backticks for template literals
 
 mongoose.connect(uri)
