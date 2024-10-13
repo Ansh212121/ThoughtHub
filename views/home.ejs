@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('partials/head') %>
+    <title>HOMEPAGE</title>
+    <style>
+        body {
+            background-color: #121212;
+            color: #e0e0e0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .container {
+            margin-top: 50px;
+        }
+
+        .card {
+            width: 100%;
+            max-width: 300px;
+            margin: auto;
+            background-color: #1e1e1e;
+            border: 1px solid #333;
+            border-radius: 10px;
+            transition: transform 0.2s;
+        }
+
+        .card:hover {
+            transform: scale(1.05);
+        }
+
+        .card-img-top {
+            width: 100%;
+            height: auto;
+            max-height: 200px;
+            object-fit: cover;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+        }
+
+        .card-body {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 15px;
+        }
+
+        .card-title {
+            font-size: 1.2rem;
+            color: #f5a623;
+            margin-bottom: 10px;
+        }
+
+        .card-text {
+            font-size: 0.9rem;
+            color: #b0b0b0;
+            margin-bottom: 15px;
+        }
+
+        .btn-primary {
+            background-color: #f5a623;
+            border-color: #f5a623;
+        }
+
+        .btn-primary:hover {
+            background-color: #e0951c;
+            border-color: #e0951c;
+        }
+
+        @media (max-width: 768px) {
+            .card {
+                max-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <%- include('./partials/nav.ejs') %>
+    
+    <div class="container mt-3">
+        <div class="row">
+            <% blogs.forEach((element) => { %>
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        <img class="card-img-top" src="<%= element.coverImageURL %>" alt="BLOG IMAGE">
+                        <div class="card-body">
+                            <h5 class="card-title"><%= element.title %></h5>
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                            <a href="/blog/<%= element._id %>" class="btn btn-primary">VIEW</a>
+                        </div>
+                    </div>
+                </div>
+            <% }) %>
+        </div>
+    </div>
+    
+    <%- include('./partials/scripts.ejs') %>  
+</body>
+</html>

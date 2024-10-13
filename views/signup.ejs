@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('partials/head') %>
+    <title>SIGNUP</title>
+    <style>
+        body {
+            background-color: #121212;
+            color: #e0e0e0;
+        }
+
+        .container {
+            max-width: 400px;
+            margin-top: 100px;
+            padding: 20px;
+            background-color: #1e1e1e;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .form-group label {
+            color: #f5a623;
+        }
+
+        .form-control {
+            background-color: #2a2a2a;
+            color: #e0e0e0;
+            border: 1px solid #444;
+        }
+
+        .form-control:focus {
+            border-color: #f5a623;
+            background-color: #2a2a2a;
+            color: #e0e0e0;
+        }
+
+        .form-text {
+            color: #a8a8a8;
+        }
+
+        .btn-primary {
+            background-color: #f5a623;
+            border: none;
+        }
+
+        .btn-primary:hover {
+            background-color: #e59400;
+        }
+    </style>
+</head>
+<body>
+    <%- include('partials/nav') %>
+    <div class="container mt-4">
+        <form action="/user/signup" method="POST">
+            <div class="form-group">
+                <label for="exampleInputEmail1">Email address</label>
+                <input type="email" class="form-control" id="exampleInputEmail1" name="email" aria-describedby="emailHelp" placeholder="Enter email" required>
+                <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+            </div>
+            <div class="form-group mt-3">
+                <label for="exampleInputPassword1">Password</label>
+                <input type="password" class="form-control" id="exampleInputPassword1" name="password" placeholder="Password" required>
+            </div>
+            <div class="form-group mt-3">
+                <label for="fullName">Full Name</label>
+                <input type="text" class="form-control" id="fullName" name="fullName" placeholder="Enter your full name" required>
+            </div>
+            <button type="submit" class="btn btn-primary mt-4">Submit</button>
+        </form>
+    </div>
+    <%- include('./partials/scripts.ejs') %>  
+</body>
+</html>
