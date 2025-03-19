@@ -22,7 +22,7 @@
       },
       profile: {
         type: Schema.Types.ObjectId,
-        ref: 'Profile', // Assuming you have a Profile model
+        ref: 'Profile', 
       },
       profileImageURL: {
         type: String,
@@ -52,8 +52,6 @@
 
     next();
   });
-
-  // Correctly defining the static method
   userSchema.statics.matchPasswordAndGenerateToken = async function (email, password) {
     const user = await this.findOne({ email });
     if (!user) throw new Error("User not found!");

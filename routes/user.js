@@ -17,21 +17,16 @@ router.post("/signin", async (req, res) => {
   console.log("Sign-in attempt:", { email, password });
 
   try {
-    // Authenticate the user and get the token
     const token = await User.matchPasswordAndGenerateToken(email, password);
     console.log("token", token);
 
-    // Fetch the user object and populate any necessary fields
-    const user = await User.findOne({ email }).populate('profile'); // Adjust if you have a profile reference
+    const user = await User.findOne({ email }).populate('profile'); 
     if (!user) {
       throw new Error("User not found!");
     }
 
-    // Set the cookie and user in the session
     res.cookie("token", token);
-    req.user = user; // Store user object in the request
-
-    // Redirect to the home page
+    req.user = user;
     return res.redirect("/");
   } catch (error) {
     console.error("Error during sign-in:", error.message);
@@ -50,16 +45,13 @@ router.get("/logout",(req,res)=>{
 router.post("/signup", async (req, res) => {
   const { fullName, email, password } = req.body;
   try {
-    // Create the new user
     const newUser = await User.create({ fullName, email, password });
-    console.log("New user created:", newUser); // Log the created user
+    console.log("New user created:", newUser); 
+    const token = await User.matchPasswordAndGenerateToken(email, password);
+    res.cookie("token", token); 
+    req.user = newUser; 
 
-    // Automatically sign in the user after sign-up
-    const token = await User.matchPasswordAndGenerateToken(email, password); // Authenticate user
-    res.cookie("token", token); // Set the token in the cookie
-    req.user = newUser; // Store user object in the request
-
-    return res.redirect("/"); // Redirect to the homepage
+    return res.redirect("/"); 
   } catch (error) {
     console.error("Error creating user:", error);
     return res.render("signup", { error: "Error creating user." });

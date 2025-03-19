@@ -2,68 +2,122 @@
 <html lang="en">
 <head>
     <%- include('partials/head') %>
-    <title>SIGNUP</title>
+    <title>Login - Access Your Account</title>
     <style>
         body {
-            background-color: #121212;
-            color: #e0e0e0;
+            background-color: #0d1117;
+            color: #c9d1d9;
+            font-family: 'Poppins', sans-serif;
         }
 
         .container {
-            max-width: 400px;
-            margin-top: 100px;
-            padding: 20px;
-            background-color: #1e1e1e;
-            border-radius: 8px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+            max-width: 420px;
+            margin: 80px auto;
+            padding: 25px;
+            background-color: #161b22;
+            border-radius: 10px;
+            box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.6);
+            text-align: center;
+        }
+
+        h2 {
+            color: #f5a623;
+            margin-bottom: 15px;
+        }
+
+        .form-group {
+            text-align: left;
+            margin-bottom: 15px;
         }
 
         .form-group label {
+            font-weight: 500;
             color: #f5a623;
+            margin-bottom: 5px;
+            display: block;
         }
 
         .form-control {
-            background-color: #2a2a2a;
-            color: #e0e0e0;
-            border: 1px solid #444;
+            background-color: #21262d;
+            color: #c9d1d9;
+            border: 1px solid #30363d;
+            border-radius: 6px;
+            padding: 10px;
+            transition: border-color 0.3s ease-in-out;
         }
 
         .form-control:focus {
             border-color: #f5a623;
-            background-color: #2a2a2a;
-            color: #e0e0e0;
+            background-color: #21262d;
+            color: #c9d1d9;
         }
 
         .form-text {
-            color: #a8a8a8;
+            color: #8b949e;
+            font-size: 0.9rem;
         }
 
         .btn-primary {
             background-color: #f5a623;
+            color: #000;
+            font-weight: bold;
+            padding: 10px;
+            width: 100%;
+            border-radius: 6px;
             border: none;
+            transition: background-color 0.3s ease-in-out;
         }
 
         .btn-primary:hover {
             background-color: #e59400;
         }
+
+        .login-message {
+            font-size: 0.95rem;
+            margin-bottom: 20px;
+            color: #a1a1a1;
+        }
+
+        .signup-link {
+            margin-top: 15px;
+            font-size: 0.9rem;
+        }
+
+        .signup-link a {
+            color: #f5a623;
+            text-decoration: none;
+        }
+
+        .signup-link a:hover {
+            text-decoration: underline;
+        }
     </style>
 </head>
 <body>
     <%- include('partials/nav') %>
-    <div class="container mt-4">
+
+    <div class="container">
+        <h2>Sign In</h2>
+        <p class="login-message">Access your account and explore great content!</p>
+
         <form action="/user/signin" method="POST">
             <div class="form-group">
-                <label for="exampleInputEmail1">Email address</label>
-                <input type="email" class="form-control" id="exampleInputEmail1" name="email" aria-describedby="emailHelp" placeholder="Enter email" required>
-                <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                <label for="exampleInputEmail1">Email Address</label>
+                <input type="email" class="form-control" id="exampleInputEmail1" name="email" aria-describedby="emailHelp" placeholder="Enter your email" required>
+                <small id="emailHelp" class="form-text">We’ll never share your email with anyone else.</small>
             </div>
-            <div class="form-group mt-3">
+
+            <div class="form-group">
                 <label for="exampleInputPassword1">Password</label>
-                <input type="password" class="form-control" id="exampleInputPassword1" name="password" placeholder="Password" required>
+                <input type="password" class="form-control" id="exampleInputPassword1" name="password" placeholder="Enter your password" required>
             </div>
-            <button type="submit" class="btn btn-primary mt-4">Submit</button>
+
+            <button type="submit" class="btn btn-primary">Login</button>
         </form>
+
+        <p class="signup-link">Don't have an account? <a href="/user/signup">Sign up here</a></p>
     </div>
+
     <%- include('./partials/scripts.ejs') %>  
 </body>
 </html>

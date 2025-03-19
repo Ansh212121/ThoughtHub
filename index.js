@@ -15,8 +15,7 @@ app.set("views", path.resolve("./views"));
 app.use(express.static(path.resolve("./public")));
 const mongoose = require('mongoose');
 
-// Use the URL encoded password
-require('dotenv').config();
+require("dotenv").config();
 
 const password =process.env.pass;
 const uri = `mongodb+srv://ansh2109ag:${password}@cluster0.9x9nr.mongodb.net/blogify?retryWrites=true&w=majority`; // Use backticks for template literals
@@ -24,13 +23,13 @@ const uri = `mongodb+srv://ansh2109ag:${password}@cluster0.9x9nr.mongodb.net/blo
 mongoose.connect(uri)
   .then(() => console.log("MongoDB connected successfully"))
   .catch(err => console.error("MongoDB connection error:", err));
-// Home route
+
 app.use(express.static('public'));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use("/user", userRoute);
-app.use("/blog", blogRoute);  // Ensure correct use of blog route
+app.use("/blog", blogRoute);  
 
 app.get("/", async (req, res) => {
   const allBlogs=await Blog.find({});
@@ -40,6 +39,4 @@ app.get("/", async (req, res) => {
         blogs:allBlogs,
     });
 });
-
-// Start the server
 app.listen(port, () => console.log(`Server started at PORT: ${port}`));

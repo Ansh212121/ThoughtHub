@@ -7,8 +7,6 @@ const mongoose = require("mongoose");
 const Blog = require("../models/blog");
 const Comment = require("../models/comment");
 const User = require('../models/user'); 
-
-// Middleware to check for authentication and user existence
 function ensureAuthenticated(req, res, next) {
   if (!req.user) {
     return res.status(401).send("User not authenticated");
@@ -16,7 +14,6 @@ function ensureAuthenticated(req, res, next) {
   next();
 }
 
-// Set up multer storage for file uploads
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     if (!req.user) {
@@ -38,19 +35,14 @@ const storage = multer.diskStorage({
 });
 
 const upload = multer({ storage: storage });
-
-// Route to render the "Add New Blog" form (Move this above /:id to prevent conflicts)
 router.get("/add-new", (req, res) => {
   console.log("Rendering add new blog form");
   return res.render("addBlog", {
       user: req.user,
   });
 });
-
-// Route to display a specific blog post by ID
 router.get('/:id', async (req, res) => {
   try {
-    // Check if the blog exists
     const blog = await Blog.findById(req.params.id).populate('createdBy');
     if (!blog) {
       return res.status(404).send("Blog not found");
@@ -60,7 +52,6 @@ router.get('/:id', async (req, res) => {
     const comments = await Comment.find({ blogId: req.params.id }).populate("createdBy");
     console.log("comments", comments);
     
-    // Pass user and comments to the view
     res.render('blog', { blog, user: req.user, comments });
   } catch (error) {
     console.error("Error fetching blog post:", error);
@@ -72,30 +63,23 @@ router.get('/:id', async (req, res) => {
 router.post("/", ensureAuthenticated, upload.single("coverImageURL"), async (req, res) => {
   try {
     const { body, title } = req.body;
-
-    // Handle cases where no file is uploaded
     let coverImageURL = null;
     if (req.file) {
       coverImageURL = `/uploads/${req.user._id}/${req.file.filename}`;
     }
 
-    // Create the blog in the database
     const blog = await Blog.create({
       title,
       body,
       createdBy: req.user._id,
-      coverImageURL, // Use the file URL if present
+      coverImageURL, 
     });
-
-    // Redirect to the newly created blog post
     return res.redirect(`/blog/${blog._id}`);
   } catch (error) {
     console.error("Error processing blog post:", error.message);
     return res.status(500).send("Server Error");
   }
 });
-
-// Route to handle comment posting
 router.post("/comment/:blogId", ensureAuthenticated, async (req, res) => {
   try {
     await Comment.create({

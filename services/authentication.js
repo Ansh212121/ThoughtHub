@@ -1,22 +1,23 @@
-const JWT =require("jsonwebtoken")
-const secret="MOGGER";
+require("dotenv").config(); 
 
-function createTokenforUser(user){
-    const payload ={
+const JWT = require("jsonwebtoken");
+const secret = process.env.SECRET;
+
+function createTokenforUser(user) {
+    const payload = {
         _id: user._id,
-        email:user.email,
-        profileImageURL:user.profileImageURL,
-        role:user.role,
+        email: user.email,
+        profileImageURL: user.profileImageURL,
+        role: user.role,
     };
-    const token=JWT.sign(payload,secret);
-    return token;
+    return JWT.sign(payload, secret);
 }
 
-function validateToken(token){
-    const payload=JWT.verify(token,secret);
-    return payload;
+function validateToken(token) {
+    return JWT.verify(token, secret);
 }
 
-module.exports ={
-    createTokenforUser,validateToken
-}
+module.exports = {
+    createTokenforUser,
+    validateToken
+};
