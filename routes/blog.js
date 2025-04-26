@@ -37,7 +37,7 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage });
 router.get("/add-new", (req, res) => {
   console.log("Rendering add new blog form");
-  return res.render("addBlog", {
+  return res.render("addblog", {
       user: req.user,
   });
 });
