@@ -2,122 +2,119 @@
 <html lang="en">
 <head>
     <%- include('partials/head') %>
-    <title>Login - Access Your Account</title>
-    <style>
-        body {
-            background-color: #0d1117;
-            color: #c9d1d9;
-            font-family: 'Poppins', sans-serif;
-        }
+    <title>Add New Blog</title>
+    <style>        body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #121212; /* Dark background */
+        color: #e0e0e0; /* Light text for contrast */
+        margin: 0;
+        padding: 0;
+    }
+    
+    .container {
+        max-width: 600px;
+        margin: 50px auto;
+        background-color: #1e1e1e; /* Slightly lighter background for the form */
+        padding: 30px;
+        border-radius: 12px;
+        box-shadow: 0 5px 15px rgba(255, 195, 0, 0.15);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
 
+    .container:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 20px rgba(255, 195, 0, 0.25);
+    }
+
+    h2 {
+        color: #f5a623; 
+        text-align: center;
+        margin-bottom: 25px;
+    }
+
+    label {
+        color: #e0e0e0;
+        font-weight: 500;
+    }
+
+    input[type="text"], textarea, input[type="file"] {
+        background-color: #2c2c2c;
+        color: #d1d1d1;
+        border: 1px solid #444;
+        border-radius: 6px;
+        width: 100%;
+        padding: 12px;
+        margin-top: 6px;
+        font-size: 1rem;
+        transition: border 0.3s ease, background 0.3s ease;
+    }
+
+    input[type="text"]:focus, textarea:focus, input[type="file"]:focus {
+        border-color: #f5a623;
+        background-color: #333;
+        outline: none;
+    }
+
+    textarea {
+        resize: vertical;
+        min-height: 120px;
+    }
+
+    button {
+        background: linear-gradient(90deg, #f5a623, #ffcc33);
+        color: #1e1e1e;
+        border: none;
+        padding: 12px;
+        font-size: 1.1rem;
+        font-weight: bold;
+        width: 100%;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: background 0.3s ease, transform 0.2s ease;
+    }
+
+    button:hover {
+        background: linear-gradient(90deg, #e0951c, #ffb800);
+        transform: scale(1.05);
+    }
+
+    .form-control {
+        margin-bottom: 18px;
+    }
+
+    @media (max-width: 768px) {
         .container {
-            max-width: 420px;
-            margin: 80px auto;
-            padding: 25px;
-            background-color: #161b22;
-            border-radius: 10px;
-            box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.6);
-            text-align: center;
+            width: 90%;
+            padding: 20px;
         }
+    }
 
-        h2 {
-            color: #f5a623;
-            margin-bottom: 15px;
-        }
-
-        .form-group {
-            text-align: left;
-            margin-bottom: 15px;
-        }
-
-        .form-group label {
-            font-weight: 500;
-            color: #f5a623;
-            margin-bottom: 5px;
-            display: block;
-        }
-
-        .form-control {
-            background-color: #21262d;
-            color: #c9d1d9;
-            border: 1px solid #30363d;
-            border-radius: 6px;
-            padding: 10px;
-            transition: border-color 0.3s ease-in-out;
-        }
-
-        .form-control:focus {
-            border-color: #f5a623;
-            background-color: #21262d;
-            color: #c9d1d9;
-        }
-
-        .form-text {
-            color: #8b949e;
-            font-size: 0.9rem;
-        }
-
-        .btn-primary {
-            background-color: #f5a623;
-            color: #000;
-            font-weight: bold;
-            padding: 10px;
-            width: 100%;
-            border-radius: 6px;
-            border: none;
-            transition: background-color 0.3s ease-in-out;
-        }
-
-        .btn-primary:hover {
-            background-color: #e59400;
-        }
-
-        .login-message {
-            font-size: 0.95rem;
-            margin-bottom: 20px;
-            color: #a1a1a1;
-        }
-
-        .signup-link {
-            margin-top: 15px;
-            font-size: 0.9rem;
-        }
-
-        .signup-link a {
-            color: #f5a623;
-            text-decoration: none;
-        }
-
-        .signup-link a:hover {
-            text-decoration: underline;
-        }
     </style>
 </head>
 <body>
-    <%- include('partials/nav') %>
-
-    <div class="container">
-        <h2>Sign In</h2>
-        <p class="login-message">Access your account and explore great content!</p>
-
-        <form action="/user/signin" method="POST">
-            <div class="form-group">
-                <label for="exampleInputEmail1">Email Address</label>
-                <input type="email" class="form-control" id="exampleInputEmail1" name="email" aria-describedby="emailHelp" placeholder="Enter your email" required>
-                <small id="emailHelp" class="form-text">We’ll never share your email with anyone else.</small>
+    <%- include('./partials/nav.ejs') %>
+    
+    <div class="container mt-5">
+        <h2 class="mb-4">Add New Blog Post</h2>
+        <form enctype="multipart/form-data" method="POST" action="/blog">
+            <div class="mb-3">
+                <label for="title" class="form-label">Title</label>
+                <input type="text" class="form-control" id="title" name="title" placeholder="Enter blog title" required>
             </div>
-
-            <div class="form-group">
-                <label for="exampleInputPassword1">Password</label>
-                <input type="password" class="form-control" id="exampleInputPassword1" name="password" placeholder="Enter your password" required>
+            <div class="mb-3">
+                <label for="body" class="form-label">Body</label>
+                <textarea class="form-control" id="body" name="body" rows="5" placeholder="Write your blog content here..." required></textarea>
             </div>
-
-            <button type="submit" class="btn btn-primary">Login</button>
+            <div class="mb-3">
+                <label for="coverImageURL" class="form-label">Upload Image</label>
+                <input type="file" class="form-control" id="coverImageURL" name="coverImageURL" accept="image/*">
+            </div>
+            
+            <button type="submit" class="btn btn-primary">Submit</button>
         </form>
-
-        <p class="signup-link">Don't have an account? <a href="/user/signup">Sign up here</a></p>
     </div>
 
     <%- include('./partials/scripts.ejs') %>  
 </body>
 </html>
+    

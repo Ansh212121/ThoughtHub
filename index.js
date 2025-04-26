@@ -11,6 +11,8 @@ require("dotenv").config();
 
 const app = express();
 app.set("view engine", "ejs");
+app.set('views', path.join(__dirname, 'views'));
+
 app.use(cookieParser());
 app.use(checkForAuthenticationCookie("token"));
 app.set("views", path.resolve("./views"));
